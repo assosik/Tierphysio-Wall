@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Impressum from './components/Impressum';
+import Datenschutz from './components/Datenschutz';
 import Ablauf2 from './components/Ablauf2';
 import Section from './components/Section';
 import AnimatedReferences from './components/AnimatedReferences';
@@ -14,13 +15,20 @@ import { Phone, Mail, MapPin, Star, Activity, Heart, Hand as Hands, Sparkles, Ch
 const lucideIcons = { Activity, Heart, Hands, Sparkles };
 
 function App() {
-  const [isImpressum, setIsImpressum] = useState(window.location.hash === '#impressum');
+  const [currentPage, setCurrentPage] = useState('main');
 
   useEffect(() => {
     const handleHashChange = () => {
-      setIsImpressum(window.location.hash === '#impressum');
+      if (window.location.hash === '#impressum') {
+        setCurrentPage('impressum');
+      } else if (window.location.hash === '#datenschutz') {
+        setCurrentPage('datenschutz');
+      } else {
+        setCurrentPage('main');
+      }
     };
 
+    handleHashChange(); // Initial check
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
@@ -48,10 +56,10 @@ function App() {
 
   return (
     <>
-      <Navigation showHero={!isImpressum} />
+      <Navigation showHero={currentPage === 'main'} />
       <WhatsAppButton />
       <AnimatedScrollObserver />
-      {!isImpressum ? (
+      {currentPage === 'main' ? (
         <>
           <Hero />
       
@@ -77,17 +85,17 @@ function App() {
               </div>
               
               {/* Main Content Container */}
-              <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid lg:grid-cols-12 gap-8 items-start">
+              <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid lg:grid-cols-12 gap-8 items-center">
                   {/* Image Column */}
                   <div className="lg:col-span-5 relative group animate-trigger-left">
                     {/* Image Container */}
-                    <div className="relative rounded-2xl overflow-hidden transform transition-transform duration-700 hover:scale-[1.02] hover:rotate-1 aspect-[3/4] max-w-[400px] mx-auto">
+                    <div className="relative rounded-2xl overflow-hidden transform transition-transform duration-700 hover:scale-[1.02] hover:rotate-1">
                       <div className="absolute inset-0 bg-gradient-to-tr from-[rgb(150,203,83)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                       <img 
                         src="/2222.PNG"
                         alt="Veterinary physiotherapist"
-                        className="w-full h-full object-cover shadow-2xl transform transition-transform duration-700 group-hover:scale-110"
+                        className="w-100 h-100 object-cover shadow-2xl transform transition-transform duration-700 group-hover:scale-110"
                         loading="lazy"
                       />
                       <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
@@ -304,8 +312,8 @@ function App() {
                     </div>
                     <div className="flex items-center">
                       <Mail className="w-6 h-6 text-[rgb(150,203,83)] mr-3" />
-                      <a href="mailto:vanessawall@web.de" className="hover:text-[rgb(150,203,83)] transition-colors duration-300">
-                        vanessawall@web.de
+                      <a href="mailto:info@tierphysio-wall.de" className="hover:text-[rgb(150,203,83)] transition-colors duration-300">
+                        info@tierphysio-wall.de
                       </a>
                     </div>
                     <div className="flex items-start">
@@ -384,8 +392,10 @@ function App() {
             </div>
           </Section>
         </>
-      ) : (
+      ) : currentPage === 'impressum' ? (
         <Impressum />
+      ) : (
+        <Datenschutz />
       )}
       <Footer />
     </>

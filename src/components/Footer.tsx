@@ -51,13 +51,11 @@ const Footer = () => {
               <li>
                 <a 
                   href="#impressum" 
-                  onClick={async (e) => {
+                  onClick={(e) => {
                     e.preventDefault();
                     window.location.hash = 'impressum';
-                    // Ensure smooth scrolling on mobile
                     window.scrollTo({
                       top: 0,
-                      left: 0,
                       behavior: 'smooth'
                     });
                   }}
@@ -67,7 +65,18 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="/Impressum.tsx" className="hover:text-[rgb(150,203,83)] transition-colors duration-300">
+                <a 
+                  href="#datenschutz"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.hash = 'datenschutz';
+                    window.scrollTo({
+                      top: 0,
+                      behavior: 'smooth'
+                    });
+                  }}
+                  className="hover:text-[rgb(150,203,83)] transition-colors duration-300"
+                >
                   Datenschutz
                 </a>
               </li>
@@ -84,7 +93,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center">
                 <Mail className="w-5 h-5 text-[rgb(150,203,83)] mr-2" />
-                <a href="mailto:vanessawall@web.de" className="hover:text-[rgb(150,203,83)] transition-colors duration-300">vanessawall@web.de</a>
+                <a href="mailto:info@tierphysio-wall.de" className="hover:text-[rgb(150,203,83)] transition-colors duration-300">info@tierphysio-wall.de</a>
               </div>
             </div>
           </div>
