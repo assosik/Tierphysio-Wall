@@ -16,9 +16,6 @@ const Footer = () => {
               Wir bringen Gesundheit und Wohlbefinden direkt zu Ihrem Vierbeiner.
             </p>
             <div className="flex space-x-4">
-              <a href="https://instagram.com" className="hover:text-[rgb(150,203,83)] transition-colors duration-300" aria-label="Instagram">
-                <Instagram size={20} />
-              </a>
             </div>
           </div>
 
@@ -51,11 +48,13 @@ const Footer = () => {
               <li>
                 <a 
                   href="#impressum" 
-                  onClick={(e) => {
+                  onClick={async (e) => {
                     e.preventDefault();
                     window.location.hash = 'impressum';
+                    // Ensure smooth scrolling on mobile
                     window.scrollTo({
                       top: 0,
+                      left: 0,
                       behavior: 'smooth'
                     });
                   }}
@@ -65,18 +64,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a 
-                  href="#datenschutz"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.hash = 'datenschutz';
-                    window.scrollTo({
-                      top: 0,
-                      behavior: 'smooth'
-                    });
-                  }}
-                  className="hover:text-[rgb(150,203,83)] transition-colors duration-300"
-                >
+                <a href="/Impressum.tsx" className="hover:text-[rgb(150,203,83)] transition-colors duration-300">
                   Datenschutz
                 </a>
               </li>

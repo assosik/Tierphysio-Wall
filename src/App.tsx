@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Impressum from './components/Impressum';
-import Datenschutz from './components/Datenschutz';
 import Ablauf2 from './components/Ablauf2';
 import Section from './components/Section';
 import AnimatedReferences from './components/AnimatedReferences';
@@ -15,26 +14,18 @@ import { Phone, Mail, MapPin, Star, Activity, Heart, Hand as Hands, Sparkles, Ch
 const lucideIcons = { Activity, Heart, Hands, Sparkles };
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('main');
+  const [isImpressum, setIsImpressum] = useState(window.location.hash === '#impressum');
 
   useEffect(() => {
     const handleHashChange = () => {
-      if (window.location.hash === '#impressum') {
-        setCurrentPage('impressum');
-      } else if (window.location.hash === '#datenschutz') {
-        setCurrentPage('datenschutz');
-      } else {
-        setCurrentPage('main');
-      }
+      setIsImpressum(window.location.hash === '#impressum');
     };
 
-    handleHashChange(); // Initial check
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
   useEffect(() => {
-    // Add schema markup
     const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.text = JSON.stringify({
@@ -56,66 +47,42 @@ function App() {
 
   return (
     <>
-      <Navigation showHero={currentPage === 'main'} />
+      <Navigation showHero={!isImpressum} />
       <WhatsAppButton />
       <AnimatedScrollObserver />
-      {currentPage === 'main' ? (
+      {!isImpressum ? (
         <>
           <Hero />
       
-          <Section id="about" title="Über mich" className="bg-white">
+          <Section id="about" title="Über mich" className="bg-white py-12 md:py-16">
             <div className="relative w-full">
-              {/* Decorative Background Elements */}
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {/* Top right decorative elements */}
-                <div className="absolute -top-24 right-0 w-[20rem] h-[20rem]">
-                  <div className="absolute inset-0 bg-[rgb(150,203,83)] rounded-full mix-blend-multiply opacity-10 animate-blob" />
-                  <div className="absolute top-12 right-12 w-24 h-24 bg-[rgb(130,183,63)] rounded-full mix-blend-multiply opacity-20 animate-blob animation-delay-2000" />
-                  <div className="absolute top-8 right-20 w-16 h-16 bg-[rgb(170,223,103)] rounded-full mix-blend-multiply opacity-15 animate-blob animation-delay-4000" />
-                </div>
-                {/* Bottom left decorative elements */}
-                <div className="absolute -bottom-24 left-0 w-[20rem] h-[20rem]">
-                  <div className="absolute inset-0 bg-[rgb(130,183,63)] rounded-full mix-blend-multiply opacity-10 animate-blob animation-delay-4000" />
-                  <div className="absolute bottom-12 left-12 w-24 h-24 bg-[rgb(150,203,83)] rounded-full mix-blend-multiply opacity-20 animate-blob" />
-                  <div className="absolute bottom-8 left-20 w-16 h-16 bg-[rgb(170,223,103)] rounded-full mix-blend-multiply opacity-15 animate-blob animation-delay-2000" />
-                </div>
-                {/* Additional subtle patterns */}
-                <div className="absolute top-1/4 right-1/3 w-8 h-8 border-2 border-[rgb(150,203,83)]/20 rounded-full" />
-                <div className="absolute bottom-1/4 left-1/3 w-8 h-8 border-2 border-[rgb(130,183,63)]/20 rounded-full" />
-              </div>
-              
-              {/* Main Content Container */}
-              <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid lg:grid-cols-12 gap-8 items-center">
-                  {/* Image Column */}
-                  <div className="lg:col-span-5 relative group animate-trigger-left">
-                    {/* Image Container */}
-                    <div className="relative rounded-2xl overflow-hidden transform transition-transform duration-700 hover:scale-[1.02] hover:rotate-1">
-                      <div className="absolute inset-0 bg-gradient-to-tr from-[rgb(150,203,83)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                   <div className="relative group animate-trigger-left flex justify-center">
+                    <div className="relative rounded-xl overflow-hidden transform transition-transform duration-500 hover:scale-[1.02]" style={{ width: '15rem' }}> 
+                      <div className="absolute inset-0 bg-gradient-to-tr from-[rgb(150,203,83)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <img 
                         src="/2222.PNG"
                         alt="Veterinary physiotherapist"
-                        className="w-100 h-100 object-cover shadow-2xl transform transition-transform duration-700 group-hover:scale-110"
+                        className="w-80 h-[300px] md:h-full object-cover shadow-lg transform transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                       />
-                      <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl" />
                     </div>
                   </div>
                   
-                  {/* Content Column */}
-                  <div className="lg:col-span-7 animate-trigger-right space-y-8">
-                    <h3 className="text-4xl font-bold text-gray-800 leading-tight">
+                  <div className="animate-trigger-right space-y-6">
+                    <h3 className="text-3xl font-bold text-gray-800 leading-tight">
                       Ihre Expertin für Tierphysiotherapie
                     </h3>
                     <div className="prose prose-lg max-w-none">
-                      <p className="text-gray-600 leading-relaxed text-lg">
+                      <p className="text-gray-600 leading-relaxed">
                         Wie schon Charles Darwin sagte: „Die Tiere empfinden wie der Mensch Freude und Schmerz, Glück und Unglück" habe ich es mir zur Aufgabe gemacht, den körperlichen Schmerz Ihrer Fellnase zu minimieren und im besten Fall zu eliminieren und das Unglück in Glück und Wohlbefinden umzuwandeln.
                       </p>
-                      <p className="text-gray-600 leading-relaxed text-lg">
+                      <p className="text-gray-600 leading-relaxed">
                         Ich begleite Ihren Vierbeiner daher sehr gerne auf der Reise der körperlichen Genesung mittels manueller Physiotherapie sowie dem Einsatz verschiedener Geräte und Methoden, wie z.B. der Akupunktur, Blutegeltherapie, Magnetfeldtherapie u.v.m.
                       </p>
-                      <p className="text-gray-600 leading-relaxed text-lg">
-                        Ich möchte, dass jeder Vierbeiner nach Möglichkeit die Chance hat, so lange es geht schmerzlos die Welt zu erkunden und gemeinsam mit Ihnen tolle Spaziergänge und Erlebnisse sammeln darf.
+                      <p className="text-gray-600 leading-relaxed">
+                        Ich möchte, dass jeder Vierbeiner nach Möglichkeit die Chance hat, weitestgehend schmerzfrei die Welt zu erkunden.
                       </p>
                     </div>
                   </div>
@@ -126,17 +93,15 @@ function App() {
 
           <Section id="services" title="Leistungen" className="bg-gray-50">
             <div className="max-w-7xl mx-auto space-y-12">
-              {/* Introduction */}
               <div className="text-center max-w-3xl mx-auto animate-trigger-fade">
                 <p className="text-xl font-inter text-gray-700 leading-relaxed tracking-wide">
                   Die Tierphysiotherapie ist eine ganzheitliche Behandlungsmethode, die darauf abzielt, 
                   die Beweglichkeit, Kraft und das allgemeine Wohlbefinden Ihres Tieres zu verbessern. 
                   Durch verschiedene Techniken und Therapieformen unterstütze ich den Heilungsprozess 
-                  und fördern die natürliche Regeneration des Körpers.
+                  und fördere die natürliche Regeneration des Körpers.
                 </p>
               </div>
 
-              {/* Main Features Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {[
                   {
@@ -176,7 +141,6 @@ function App() {
                 ))}
               </div>
 
-              {/* Benefits Section */}
               <div className="grid md:grid-cols-2 gap-8 mt-12">
                 <div className="bg-white rounded-xl p-8 shadow-lg animate-trigger-left">
                   <h3 className="text-2xl font-semibold mb-6 text-gray-800">Behandlungsmethoden</h3>
@@ -216,7 +180,6 @@ function App() {
                 </div>
               </div>
 
-              {/* Quote */}
               <blockquote className="relative mt-12 bg-white rounded-xl p-8 shadow-lg animate-trigger-fade">
                 <div className="absolute -top-4 left-8">
                   <Quote className="w-8 h-8 text-[rgb(150,203,83)]" />
@@ -300,7 +263,6 @@ function App() {
           <Section id="contact" title="Kontakt" className="bg-gray-50">
             <div className="grid md:grid-cols-2 gap-8 max-w-7xl mx-auto">
               <div className="space-y-8">
-                {/* Contact Info Card */}
                 <div className="bg-white rounded-xl shadow-lg p-6 animate-trigger-left">
                   <h3 className="text-2xl font-semibold mb-6 text-gray-800">Kontaktieren Sie mich</h3>
                   <div className="space-y-4">
@@ -325,7 +287,6 @@ function App() {
                   </div>
                 </div>
                 
-                {/* Map */}
                 <div className="bg-white rounded-xl shadow-lg p-6 animate-trigger-left" style={{ animationDelay: '200ms' }}>
                   <h4 className="text-lg font-semibold mb-4 text-gray-800">Einsatzgebiet</h4>
                   <p className="text-gray-600 mb-4">Ich bin mobil in Lage und den umliegenden Gemeinden für Sie im Einsatz.</p>
@@ -345,7 +306,6 @@ function App() {
                 </div>
               </div>
               
-              {/* Contact Form Card */}
               <div className="bg-white rounded-xl shadow-lg p-8 animate-trigger-right">
                 <h3 className="text-2xl font-semibold mb-6 text-gray-800">Schreiben Sie mir</h3>
                 <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
@@ -392,10 +352,8 @@ function App() {
             </div>
           </Section>
         </>
-      ) : currentPage === 'impressum' ? (
-        <Impressum />
       ) : (
-        <Datenschutz />
+        <Impressum />
       )}
       <Footer />
     </>
