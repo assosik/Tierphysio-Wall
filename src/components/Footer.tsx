@@ -31,7 +31,16 @@ const Footer = () => {
               ].map((link) => (
                 <li key={link.id}>
                   <button
-                    onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() => {
+                      if (window.location.hash === '#impressum' || window.location.hash === '#datenschutz') {
+                        window.location.hash = '';
+                        setTimeout(() => {
+                          document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+                        }, 100);
+                      } else {
+                        document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                     className="hover:text-[rgb(150,203,83)] transition-colors duration-300"
                   >
                     {link.label}
@@ -48,23 +57,16 @@ const Footer = () => {
               <li>
                 <a 
                   href="#impressum" 
-                  onClick={async (e) => {
-                    e.preventDefault();
-                    window.location.hash = 'impressum';
-                    // Ensure smooth scrolling on mobile
-                    window.scrollTo({
-                      top: 0,
-                      left: 0,
-                      behavior: 'smooth'
-                    });
-                  }}
                   className="hover:text-[rgb(150,203,83)] transition-colors duration-300"
                 >
                   Impressum
                 </a>
               </li>
               <li>
-                <a href="/Impressum.tsx" className="hover:text-[rgb(150,203,83)] transition-colors duration-300">
+                <a 
+                  href="#datenschutz" 
+                  className="hover:text-[rgb(150,203,83)] transition-colors duration-300"
+                >
                   Datenschutz
                 </a>
               </li>
