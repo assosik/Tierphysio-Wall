@@ -4,7 +4,7 @@ import "yet-another-react-lightbox/styles.css";
 
 const images = [
   {
-    src: "/d4457626-9bcf-4529-b248-5032b21d1c7c.JPG",
+    src: "https://webseitendetmold.blob.core.windows.net/vanessatier/d4457626-9bcf-4529-b248-5032b21d1c7c.JPG",
     alt: "Erstgespräch und Anamnese",
     title: "",
     description: "Über Stangen zu laufen fördert die Koordination und den Gleichgewichtssinn. Alternativ setze ich Koordinationsübungen auf einem Balanceboard um."
@@ -16,19 +16,19 @@ const images = [
     description: "Blutegel am Pferd. Die in ihrem Speichel enthaltenen biologisch aktiven Substanzen sind blutverdünnend, schmerzlindernd und entzündungshemmend, was sich effektiv bei Arthrose herausgestellt hat. Auch Blutohren beim Hund lassen sich mit Blutegeln ganz hervorragend behandeln."
   },
   {
-    src: "/IMG_8431.jpg",
+    src: "https://webseitendetmold.blob.core.windows.net/vanessatier/IMG_8431.jpg",
     alt: "Physiotherapeutische Behandlung",
     title: "",
     description: "Durch den Druck des Balls können Verspannungen gelöst und die Durchblutung angeregt werden."
   },
   {
-    src: "/IMG_8345.jpg",
+    src: "https://webseitendetmold.blob.core.windows.net/vanessatier/IMG_8345.jpg",
     alt: "Therapiefortschritt",
     title: "",
     description: "Die Magnetfeldtherapie ist ein naturheilkundliches Behandlungsverfahren. Dabei werden Magneten oder elektrisch erzeugte Magnetfelder unter anderem dazu eingesetzt, Entzündungen zu hemmen, Schmerzen zu lindern oder die Heilung zu unterstützen."
   },
   {
-    src: "/IMG_8424.jpg",
+    src: "https://webseitendetmold.blob.core.windows.net/vanessatier/IMG_8424.jpg",
     alt: "Erfolgreiche Behandlung",
     title: "",
     description: "Mit Hilfe eines TENS-Gerätes werden elektrische Impulse erzeugt und von Elektroden durch die Haut auf das Nervensystem übertragen. Diese Impulse bewirken je nach Frequenz eine Art 'Gegenirritation' im Gehirn oder die Ausschüttung körpereigener schmerzstillender Substanzen und erreichen somit eine Schmerzlinderung."

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Impressum from './components/Impressum';
+import Datenschutz from './components/Datenschutz';
 import Ablauf2 from './components/Ablauf2';
 import Section from './components/Section';
 import AnimatedReferences from './components/AnimatedReferences';
@@ -14,13 +15,20 @@ import { Phone, Mail, MapPin, Star, Activity, Heart, Hand as Hands, Sparkles, Ch
 const lucideIcons = { Activity, Heart, Hands, Sparkles };
 
 function App() {
-  const [isImpressum, setIsImpressum] = useState(window.location.hash === '#impressum');
+  const [currentPage, setCurrentPage] = useState('main');
 
   useEffect(() => {
     const handleHashChange = () => {
-      setIsImpressum(window.location.hash === '#impressum');
+      if (window.location.hash === '#impressum') {
+        setCurrentPage('impressum');
+      } else if (window.location.hash === '#datenschutz') {
+        setCurrentPage('datenschutz');
+      } else {
+        setCurrentPage('main');
+      }
     };
 
+    handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
@@ -47,24 +55,23 @@ function App() {
 
   return (
     <>
-      <Navigation showHero={!isImpressum} />
+      <Navigation showHero={currentPage === 'main'} />
       <WhatsAppButton />
       <AnimatedScrollObserver />
-      {!isImpressum ? (
+      {currentPage === 'main' ? (
         <>
           <Hero />
-      
           <Section id="about" title="Über mich" className="bg-white py-12 md:py-16">
             <div className="relative w-full">
               <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
-                   <div className="relative group animate-trigger-left flex justify-center">
-                    <div className="relative rounded-xl overflow-hidden transform transition-transform duration-500 hover:scale-[1.02]" style={{ width: '15rem' }}> 
+                  <div className="relative group animate-trigger-left">
+                    <div className="relative rounded-xl overflow-hidden transform transition-transform duration-500 hover:scale-[1.02]" style={{ width: '20rem' }}>
                       <div className="absolute inset-0 bg-gradient-to-tr from-[rgb(150,203,83)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <img 
-                        src="/2222.PNG"
+                        src="https://webseitendetmold.blob.core.windows.net/vanessatier/2222.PNG"
                         alt="Veterinary physiotherapist"
-                        className="w-80 h-[300px] md:h-full object-cover shadow-lg transform transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-[200px] md:h-[500px] object-cover shadow-lg transform transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                       />
                     </div>
@@ -352,8 +359,10 @@ function App() {
             </div>
           </Section>
         </>
-      ) : (
+      ) : currentPage === 'impressum' ? (
         <Impressum />
+      ) : (
+        <Datenschutz />
       )}
       <Footer />
     </>
