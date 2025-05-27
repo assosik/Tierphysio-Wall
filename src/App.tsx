@@ -61,18 +61,19 @@ function App() {
       {currentPage === 'main' ? (
         <>
           <Hero />
-          <Section id="about" title="Über mich" className="bg-white py-12 md:py-16">
+          <Section id="about\" title="Über mich\" className="bg-white py-12 md:py-16">
             <div className="relative w-full">
               <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                   <div className="relative group animate-trigger-left">
-                    <div className="relative rounded-xl overflow-hidden transform transition-transform duration-500 hover:scale-[1.02]" style={{ width: '20rem' }}>
+                    <div className="relative rounded-xl overflow-hidden transform transition-transform duration-500 hover:scale-[1.02]\" style={{ width: '100%', maxWidth: '40rem' }}>
                       <div className="absolute inset-0 bg-gradient-to-tr from-[rgb(150,203,83)]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <img 
-                        src="https://webseitendetmold.blob.core.windows.net/vanessatier/2222.PNG"
-                        alt="Veterinary physiotherapist"
-                        className="w-full h-[200px] md:h-[500px] object-cover shadow-lg transform transition-transform duration-500 group-hover:scale-105"
+                        src="https://webseitendetmold.blob.core.windows.net/vanessatier/Foto 24.05.25, 15 42 21 (1).JPG"
+                        alt="Vanessa Wall - Tierphysiotherapeutin"
+                        className="w-full aspect-square object-cover shadow-lg transform transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     </div>
                   </div>
