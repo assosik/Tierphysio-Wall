@@ -61,7 +61,7 @@ function App() {
       {currentPage === 'main' ? (
         <>
           <Hero />
-          <Section id="about\" title="Über mich\" className="bg-white py-12 md:py-16">
+          <Section id="about\" title="Über mich" className="bg-white py-12 md:py-16">
             <div className="relative w-full">
               <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
